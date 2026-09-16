@@ -11,7 +11,8 @@ LR: Train accuracy: 0.679
 Test accuracy:  0.678
 Gap (train - test): +0.001
 
-Current best model: LR is the current best model since the difference between the train accuracy and the test accuracy is really close to zero, so this means there is no overfitting or underfitting. The DT model, has a Gap (difference) worst than the LR model and this can explain a overfitting since the train accuracy is higher compared to the test accuracy.
+Current best model: LR is the current best model since the difference between the train accuracy and the test accuracy is very close to zero, meaning there is no overfitting or underfitting. The DT model has a worse gap than the LR model, and this can be explained by overfitting, since the train accuracy is much higher compared to the test accuracy. LR also has a higher test accuracy (0.678 vs 0.627) and better F1-scores for both classes, confirming it generalizes better overall.
+
 
 This is the **starting point** for your semester project: a small but *complete* predictive pipeline -- every piece a real project needs (entry point, config, data loading, preprocessing, model, evaluation), just kept as simple as possible for now.
 
