@@ -29,7 +29,6 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import OneHotEncoder, OrdinalEncoder, StandardScaler, MinMaxScaler, RobustScaler
 from category_encoders import CountEncoder, TargetEncoder
 
-from src.data_diagnostics import flag_invalid_values
 
 
 def _canonicalize_categories(df: pd.DataFrame, columns_and_maps: dict, placeholder_tokens: set) -> pd.DataFrame:
@@ -71,6 +70,22 @@ def clean_dataset(df: pd.DataFrame, diagnostics_config: dict) -> pd.DataFrame:
     out = out.drop(columns=columns_to_drop)
 
     return out
+
+
+
+def drop_duplicate_rows(df: pd.DataFrame, id_column: str = None) -> pd.DataFrame:
+    """
+    TRAINING DATA ONLY (week 4). Drops exact duplicate rows and repeated ids (keeping
+    the first), so the same person can't be counted twice -- or land in both the
+    development and the locked test set. Must run *before* `split_dev_test()`.
+
+    Never call this on data you're predicting for: every row there needs a prediction.
+    """
+    out = df.drop_duplicates()
+    if id_column and id_column in out.columns:
+        out = out.drop_duplicates(subset=id_column, keep="first")
+    return out
+
 
 
 def add_missingness_indicators(df: pd.DataFrame, mnar_indicator_sources: list) -> pd.DataFrame:

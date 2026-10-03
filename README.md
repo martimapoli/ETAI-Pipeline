@@ -27,6 +27,21 @@ Gap (train - test): +0.019
 
 Current best model: LR remains the current best model. After preprocessing (proper imputation instead of naively dropping rows with missing values, plus consistent categorical encoding), the test set grew from 1252 to 1443 rows, meaning fewer rows were discarded and more of the original data is now being used. Both models' gaps increased slightly compared to Week 2 (LR: +0.001 to +0.019; DT: +0.202 to +0.178), but for different reasons: DT's gap actually improved (less overfitting), while LR's gap grew but is still very close to zero. LR continues to generalize better than DT, with a higher test accuracy (0.657 vs 0.613). The slight drop in test accuracy for both models compared to Week 2 is expected: the rows that used to be dropped due to missing values are now being imputed and included, and those rows may be systematically harder to predict, which is a fairer and more realistic evaluation than simply discarding them.
 
+--------------------------------------------Week 4 ---------------------------------
+DT (5-fold stratified CV): Train accuracy mean = 0.801, Validation accuracy mean = 0.627, Gap = +0.174
+LR (5-fold stratified CV): Train accuracy mean = 0.675, Validation accuracy mean = 0.674, Gap = +0.001
+
+Current best model: LR remains the best model under cross-validation, confirming the
+pattern from previous weeks. Its near-zero gap (+0.001) shows it generalizes
+consistently across folds, while DT's large, stable gap (+0.174, low train std of
+0.003) confirms it reliably overfits regardless of which rows land in training vs.
+validation -- not a fluke of one split. LR also has higher validation accuracy (0.674
+vs. 0.627) and better F1 for both classes. Cross-validation's main value here is the
+per-fold std: LR's validation std (0.014) is lower than DT's, meaning LR's performance
+is also more stable across different data splits, not just higher on average.
+
+
+
 
 This is the **starting point** for your semester project: a small but *complete* predictive pipeline -- every piece a real project needs (entry point, config, data loading, preprocessing, model, evaluation), just kept as simple as possible for now.
 
