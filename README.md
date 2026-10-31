@@ -42,6 +42,31 @@ is also more stable across different data splits, not just higher on average.
 
 
 
+--------------------------------------------Week 7---------------------------------
+
+
+ Scoreboard (ROC-AUC, 5-fold stratified CV on the development set)
+
+| Model | Untuned | Tuned (nested CV) | Floor |
+|---|---|---|---|
+| gradient_boosting | 0.727 | 0.727 ± 0.014 | 0.500 |
+| hist_gradient_boosting | 0.717 | 0.727 ± 0.016 | 0.500 |
+| adaboost | 0.723 | 0.726 ± 0.016 | 0.500 |
+| oblique_random_forest | 0.685 | 0.726 ± 0.015 | 0.500 |
+| random_forest | 0.683 | 0.726 ± 0.013 | 0.500 |
+| logistic_regression | 0.719 | — (no search space) | 0.500 |
+| decision_tree | 0.604 | 0.717 ± 0.017 | 0.500 |
+| naive_bayes | 0.685 | 0.705 ± 0.012 | 0.500 |
+| dummy | 0.500 | — | 0.500 |
+
+Selection metric
+
+I chose ROC-AUC as the selection metric. It scores how well a model ranks people by predicted risk across all thresholds, so it does not depend on the 0.5 cut-off, which is a separate (and, in a sentencing context, policy) decision. The classes are fairly balanced (about 45% reoffend) and the dummy baseline scores exactly 0.5, so the floor is easy to read; the threshold-dependent metrics are still reported in each run's results file.
+
+
+
+
+
 
 This is the **starting point** for your semester project: a small but *complete* predictive pipeline -- every piece a real project needs (entry point, config, data loading, preprocessing, model, evaluation), just kept as simple as possible for now.
 

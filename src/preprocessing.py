@@ -152,4 +152,4 @@ def split_dev_test(X, y, extras, test_size: float, random_state: int):
     used only for the final assessment. Returns X_dev, X_test, y_dev, y_test, extras_dev,
     extras_test, row-aligned.
     """
-    return train_test_split(X, y, extras, test_size=test_size, random_state=random_state, s
+    return train_test_split(X, y, extras, test_size=test_size, random_state=random_state, stratify=y)
